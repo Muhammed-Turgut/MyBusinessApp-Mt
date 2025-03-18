@@ -47,14 +47,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
+             Myui()
         }
     }
 }
@@ -130,7 +130,24 @@ fun Banner() {
             shape = RoundedCornerShape(25.dp)
         )) {
           val (img,text) = createRefs()
-        Image(modifier = Modifier)
+        Image(modifier = Modifier
+            .constrainAs(img){
+                top.linkTo(parent.top)
+                bottom.linkTo(parent.bottom)
+                end.linkTo(parent.end)
+            }.padding(end = 16.dp),
+            painter = painterResource(R.drawable.ai), contentDescription = null
+        )
+
+        Text(text="Advaced Certification \n"+"Program in AI",
+            fontSize = 18.sp,
+            color = Color.Black,
+            modifier = Modifier.padding(start = 16.dp)
+                .constrainAs(text){
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                    bottom.linkTo(parent.bottom)
+                })
     }
 }
 
